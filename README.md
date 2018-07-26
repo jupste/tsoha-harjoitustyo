@@ -1,0 +1,2 @@
+# tsoha-harjoitustyo
+Tietokantasovellus harjoitustyö
