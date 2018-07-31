@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+
+{% block body %}
+  <table>
+    <tr>
+      <th>Chore</th>
+      <th>Household</th>
+      <th>Points</th>
+      <th></th>
+    </tr>
+    {% for c in avchores %}
+    <tr>
+      <td>{{ c.id }}</td>
+      <td>{{ c.household }}</td>
+      <td>{{ c.points }}</td>
+      <td>
+	<form method="POST" action="{{ url_for('chore_do_partially', avchore_id=c.id) }}">
+	  <input type="submit" value="Change status!"/>
+	</form>
+      </td>
+    </tr>
+    {% endfor %}
+  </table>
+{% endblock %}
