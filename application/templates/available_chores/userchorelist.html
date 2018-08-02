@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+{% block body %}
+  <H1>Käyttäjän tekemät kotityöt</H1>
+  <table>
+		{% for u in donechores %}
+		<tr>
+      		<td>{{ u.userid }}</td>
+      		<td>{{ u.choreid }}</td>
+      		<td>{{ u.date_created}}</td>
+    	</tr>
+  		{% endfor %}
+ 	</table>
+{% endblock %}

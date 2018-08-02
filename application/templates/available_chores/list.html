@@ -1,9 +1,16 @@
 {% extends "layout.html" %}
 
 {% block body %}
+<tr>
+<form method="POST" action="{{ url_for('tasks_form') }}">
+  <input type="submit" value="Käyttäjän kotityöt"/>
+</form>
+</tr>
+<tr>
 <form method="POST" action="{{ url_for('tasks_create') }}">
   <input type="submit" value="Lisää kotityö"/>
 </form>
+</tr>
   <table>
     <tr>
       <th>Kotityö</th>
@@ -21,11 +28,6 @@
 	       <form method="POST" action="{{ url_for('chore_do_partially', chore_id=c.id) }}">
 	         <input type="submit" value="Tee osittain"/>
 	       </form>
-      </td>
-      <td>
-          <form method="POST" action="{{ url_for('chore_do_fully', chore_id=c.id) }}">
-            <input type="submit" value="Tee kokonaan"/>
-          </form>
       </td>
     </tr>
     {% endfor %}
