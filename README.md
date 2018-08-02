@@ -2,7 +2,10 @@
 
 [PisteetKotiin](https://pisteetkotiin.herokuapp.com/)
 
-[Käyttäjätarinat](https://github.com/jupste/tsoha-harjoitustyo/documentation/userstory.md)
+[Käyttäjätarinat](https://github.com/jupste/tsoha-harjoitustyo/blob/master/documentation/userstory.md)
+
+[Tietokantamalli](https://github.com/jupste/tsoha-harjoitustyo/blob/master/documentation/diagram.png)
+
 
 Usein kotityöt jäävät tekemättä, kun taloudessa on monta henkilöä ja töiden jako jää puolitiehen. Tähän ongelmaan on kehitteillä PisteetKotiin- kotityösovellus, jonka avulla kotityöt jakautuvat melkein itsestään. 
 
