@@ -1,22 +1,31 @@
 {% extends "layout.html" %}
 
 {% block body %}
+<form method="POST" action="{{ url_for('tasks_create') }}">
+  <input type="submit" value="Lisää kotityö"/>
+</form>
   <table>
     <tr>
-      <th>Chore</th>
-      <th>Household</th>
-      <th>Points</th>
-      <th></th>
+      <th>Kotityö</th>
+      <th>Kotitalous</th>
+      <th>Tyyppi</th>
+      <th>Pisteet</th>
     </tr>
     {% for c in avchores %}
     <tr>
       <td>{{ c.id }}</td>
       <td>{{ c.household }}</td>
+      <td>{{ c.choretype }}</td>
       <td>{{ c.points }}</td>
       <td>
-	<form method="POST" action="{{ url_for('chore_do_partially', avchore_id=c.id) }}">
-	  <input type="submit" value="Change status!"/>
-	</form>
+	       <form method="POST" action="{{ url_for('chore_do_partially', chore_id=c.id) }}">
+	         <input type="submit" value="Tee osittain"/>
+	       </form>
+      </td>
+      <td>
+          <form method="POST" action="{{ url_for('chore_do_fully', chore_id=c.id) }}">
+            <input type="submit" value="Tee kokonaan"/>
+          </form>
       </td>
     </tr>
     {% endfor %}
