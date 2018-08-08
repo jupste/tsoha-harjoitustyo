@@ -8,7 +8,7 @@ from application.available_chores.forms import ChoreForm
 @app.route("/available_chores/", methods=["GET"])
 @login_required
 def chore_index():
-   return render_template("/available_chores/list.html", avchores = AvailableChore.query.filter(AvailableChore.points>0, AvailableChore.household==1))
+   return render_template("/available_chores/list.html", avchores = AvailableChore.query.filter(AvailableChore.points>0))
 
 @app.route("/available_chores/donechores/", methods=["GET"])
 @login_required
@@ -47,9 +47,9 @@ def chore_create_custom():
     form = ChoreForm(request.form)
     if not form.validate():
         return render_template("available_chores/new.html", form = form)
-    chore = AvailableChore(1, form.points.data, form.choretype.data)
+    chore = AvailableChore(current_user.household, form.points.data, form.choretype.data)
     chore.message=form.message.data
-    chore.createdBy=1
+    chore.createdBy=current_user.id
     db.session.add(chore)
     db.session().commit()
     return redirect(url_for("chore_index"))

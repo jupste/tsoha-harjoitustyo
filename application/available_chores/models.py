@@ -5,7 +5,7 @@ class AvailableChore(db.Model):
     date_created = db.Column(db.DateTime, default=db.func.current_timestamp())
     date_modified = db.Column(db.DateTime, default=db.func.current_timestamp(),
     onupdate=db.func.current_timestamp())
-    household = db.Column(db.Integer, db.Foreignkey('household.id'), nullable=False)
+    household = db.Column(db.Integer, db.ForeignKey('account.household'), nullable=False)
     points = db.Column(db.Integer, nullable=False)
     maxpoints = db.Column(db.Integer, nullable=False)
     choretype= db.Column(db.Integer, nullable= False)    
