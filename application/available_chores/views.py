@@ -1,41 +1,55 @@
 from application import app, db
 from sqlalchemy import func
 from flask import render_template, request, url_for, redirect
-from application.available_chores.models import AvailableChore
-from application.available_chores.models import User
-from application.available_chores.models import DoneChore
-user=1
+from flask_login import login_required
+from application.available_chores.models import AvailableChore, DoneChore
+from application.available_chores.forms import ChoreForm
 
 @app.route("/available_chores/", methods=["GET"])
-def tasks_index():
-   if(db.session.query(User).count()==0):
-       u=User("TestiSeppo")
-       db.session.add(u)
-       db.session.commit()
-   return render_template("/available_chores/list.html", avchores = AvailableChore.query.filter(AvailableChore.points>0))
+@login_required
+def chore_index():
+   return render_template("/available_chores/list.html", avchores = AvailableChore.query.filter(AvailableChore.points>0, AvailableChore.household==1))
 
 @app.route("/available_chores/donechores/", methods=["GET"])
+@login_required
 def user_index():
     return render_template("/available_chores/userchorelist.html", donechores = DoneChore.query.filter(DoneChore.userid==1))
 
 @app.route("/available_chores/new/")
-def tasks_form():
-    return render_template("/available_chores/new.html")
+@login_required
+def chore_form():
+    return render_template("/available_chores/new.html", form=ChoreForm())
 
-@app.route("/available_chores/<chore_id>/", methods=["POST"])
-def chore_do_partially(chore_id):
+@app.route("/available_chores/<chore_id>/<int:fully>", methods=["POST"])
+@login_required
+def do_chore(chore_id, fully):
     chore = AvailableChore.query.get(chore_id)
-    if(chore.points>0):
-        chore.points = chore.points-1
-        d= DoneChore(1, chore.id, 1)
-        db.session.add(d)
-        db.session.commit()        
-    db.session().commit()
-    return redirect(url_for("tasks_index"))
+    if(db.session.query(DoneChore.query.filter(DoneChore.id == chore.id).exists()).scalar()):
+        donechore=DoneChore.query.get(chore.id)
+    else:
+        donechore= DoneChore(1, chore.id, 0)
+        db.session.add(donechore)
+    if(chore.points>0):    
+        if(fully):
+            score=chore.points
+            chore.points = 0            
+            donechore.points=donechore.points+score
+            db.session.commit()    
+        else:
+            chore.points=chore.points-1
+            donechore.points= donechore.points+1
+            db.session.commit()
+    return redirect(url_for("chore_index"))
 
 @app.route("/available_chores/", methods=["POST"])
-def tasks_create():
-    chore=AvailableChore(1)
+@login_required
+def chore_create_custom():
+    form = ChoreForm(request.form)
+    if not form.validate():
+        return render_template("available_chores/new.html", form = form)
+    chore = AvailableChore(1, form.points.data, form.choretype.data)
+    chore.message=form.message.data
+    chore.createdBy=1
     db.session.add(chore)
     db.session().commit()
-    return redirect(url_for("tasks_index"))
+    return redirect(url_for("chore_index"))

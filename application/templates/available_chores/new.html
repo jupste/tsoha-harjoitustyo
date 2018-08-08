@@ -1,7 +1,40 @@
 {% extends "layout.html" %}
   
 {% block body %}
-<form method="POST" action="{{ url_for('tasks_create') }}">
-  <input type="submit" value="Lisää kotityö"/>
-</form>
+  <form method="POST" action="{{ url_for('chore_create_custom') }}">
+    <table>
+     <tr><td>
+	  {{ form.choretype.label }}
+		</td>
+	<td>
+	  {{ form.choretype }}
+	</td></tr>
+	<tr><td>
+	  {{ form.points.label }}
+	</td>
+	<td>
+	  {{ form.points }}
+	</td>
+	<td>
+		<ul>
+			{% for error in form.points.errors %}
+			<li>{{ error }}</li>
+			{% endfor %}
+		</ul>
+		</td>
+      </tr>
+      <tr>
+				<td>
+	  {{ form.message.label }}
+	</td>
+	<td>
+	  {{ form.message }}
+	</td>
+      </tr>
+      <tr>
+		<td colspan="2">
+	  <input type="submit" value="Lisää custom kotityö"/>
+	</td>
+      </tr>
+  </form>
 {% endblock %}
