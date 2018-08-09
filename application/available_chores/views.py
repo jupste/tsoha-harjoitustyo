@@ -48,7 +48,6 @@ def chore_create_custom():
         return render_template("available_chores/new.html", form = form)
     chore = AvailableChore(current_user.household, form.points.data, form.choretype.data)
     chore.message=form.message.data
-    chore.createdBy=current_user.id
     db.session.add(chore)
     db.session().commit()
     return redirect(url_for("chore_index"))

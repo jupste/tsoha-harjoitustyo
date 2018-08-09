@@ -8,8 +8,7 @@ class AvailableChore(db.Model):
     household = db.Column(db.Integer, db.ForeignKey('account.household'), nullable=False)
     points = db.Column(db.Integer, nullable=False)
     maxpoints = db.Column(db.Integer, nullable=False)
-    choretype= db.Column(db.Integer, nullable= False)    
-    createdBy=db.Column(db.Integer, nullable= True)
+    choretype= db.Column(db.Integer, nullable= False)
     message= db.Column(db.String, nullable= True)
     
     def __init__(self, household, points, choretype):
