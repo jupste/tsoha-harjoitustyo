@@ -32,7 +32,8 @@ def register_form():
 @app.route("/auth/register", methods = ["POST"])
 def auth_register():
     form = UserForm(request.form)
-
+    if not form.validate():
+        return render_template("available_chores/new.html", form = form)
     user = User(form.name.data, form.username.data, form.password.data, form.household.data)
     db.session.add(user)
     db.session().commit()

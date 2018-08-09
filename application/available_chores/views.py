@@ -2,7 +2,8 @@ from application import app, db
 from sqlalchemy import func
 from flask import render_template, request, url_for, redirect
 from flask_login import login_required, current_user
-from application.available_chores.models import AvailableChore, DoneChore
+from application.available_chores.models import AvailableChore
+from application.available_chores.donechores.models import DoneChore
 from application.available_chores.forms import ChoreForm
 
 @app.route("/available_chores/", methods=["GET"])
