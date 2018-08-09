@@ -8,7 +8,7 @@ households= [(1,'TestiTalo'),(2, 'Hullujen huone')]
 class UserForm(FlaskForm):
     name= StringField("Nimi")
     username = StringField("Käyttäjätunnus")
-    password = PasswordField("Salasana", [validators.Length(min=4, message= "Liian lyhyt salasana")])
+    password = PasswordField("Salasana")
     household = SelectField("Kotitalous", choices=households)
     class Meta:
         csrf = False
