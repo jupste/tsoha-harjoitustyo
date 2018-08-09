@@ -15,7 +15,7 @@ class User(db.Model):
     points= db.Column(db.Integer, nullable=False)
     household= db.Column(db.Integer,db.ForeignKey('household.id'), nullable=False)
 
-    chores= db.relationship("AvailableChore", backref='account', lazy=True)
+    chores= db.relationship("AvailableChore", backref='account', lazy='dynamic')
     def __init__(self, name, username, password, household):
         self.name = name
         self.username = username

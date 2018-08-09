@@ -1,19 +1,19 @@
 from application import app, db
 from sqlalchemy import func
 from flask import render_template, request, url_for, redirect
-from flask_login import login_required
+from flask_login import login_required, current_user
 from application.available_chores.models import AvailableChore, DoneChore
 from application.available_chores.forms import ChoreForm
 
 @app.route("/available_chores/", methods=["GET"])
 @login_required
 def chore_index():
-   return render_template("/available_chores/list.html", avchores = AvailableChore.query.filter(AvailableChore.points>0))
+   return render_template("/available_chores/list.html", avchores = current_user.chores.filter(AvailableChore.points>0))
 
 @app.route("/available_chores/donechores/", methods=["GET"])
 @login_required
 def user_index():
-    return render_template("/available_chores/userchorelist.html", donechores = DoneChore.query.filter(DoneChore.userid==1))
+    return render_template("/available_chores/userchorelist.html", donechores = DoneChore.query.filter(DoneChore.userid==current_user.id))
 
 @app.route("/available_chores/new/")
 @login_required
@@ -24,11 +24,10 @@ def chore_form():
 @login_required
 def do_chore(chore_id, fully):
     chore = AvailableChore.query.get(chore_id)
-    if(db.session.query(DoneChore.query.filter(DoneChore.id == chore.id).exists()).scalar()):
-        donechore=DoneChore.query.get(chore.id)
-    else:
-        donechore= DoneChore(1, chore.id, 0)
+    if not(db.session.query(DoneChore.query.filter(DoneChore.id == chore.id).exists()).scalar()):
+        donechore= DoneChore(current_user.id, chore.id, 0)
         db.session.add(donechore)
+    donechore=DoneChore.query.get(chore.id)       
     if(chore.points>0):    
         if(fully):
             score=chore.points
