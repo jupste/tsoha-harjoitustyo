@@ -1,6 +1,7 @@
 from application import db
 
 class AvailableChore(db.Model):
+    __tablename__ = "chore"
     id = db.Column(db.Integer, primary_key=True)
     date_created = db.Column(db.DateTime, default=db.func.current_timestamp())
     date_modified = db.Column(db.DateTime, default=db.func.current_timestamp(),
