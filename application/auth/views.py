@@ -2,16 +2,16 @@
 # -*- coding: utf-8 -*-
 from flask import render_template, request, redirect, url_for
 from flask_login import login_user, logout_user
-from application import app
+from application import app, db
 from application.auth.models import User
-from application.auth.forms import LoginForm
+from application.auth.forms import UserForm
 
 @app.route("/auth/login", methods = ["GET", "POST"])
 def auth_login():
     if request.method == "GET":
-        return render_template("auth/loginform.html", form = LoginForm())
+        return render_template("auth/loginform.html", form = UserForm())
 
-    form = LoginForm(request.form)
+    form = UserForm(request.form)
     
     user = User.query.filter_by(username=form.username.data, password=form.password.data).first()
     if not user:
@@ -25,3 +25,15 @@ def auth_login():
 def auth_logout():
     logout_user()
     return redirect(url_for("index"))    
+@app.route("/auth/register")
+def register_form():
+    return render_template("/auth/register.html", form=UserForm())
+
+@app.route("/auth/register", methods = ["POST"])
+def auth_register():
+    form = UserForm(request.form)
+
+    user = User(form.name.data, form.username.data, form.password.data, form.household.data)
+    db.session.add(user)
+    db.session().commit()
+    return render_template("auth/loginform.html", form=UserForm())
