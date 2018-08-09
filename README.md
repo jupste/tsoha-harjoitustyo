@@ -20,4 +20,6 @@ Toiminnalisuudet:
 - Kotitalous generoi listan suorittamattomista kotitöistä, josta käyttäjät voivat käydä valitsemassa suoritettavia kotitöitä. Suoritetut kotityöt näkyvät käyttäjän näkymässä.
 - Käyttäjät voivat tarvittaessa lisätä generoitavia kotitöitä ja myös lisätä kertaluonteisia kotitaloussuoritteita. 
 
-
+Sovelluksen käyttäjätunnukset:
+tunnus: seppo
+salasana: testi
