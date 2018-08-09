@@ -4,8 +4,7 @@ class AvailableChore(db.Model):
     __tablename__ = "chore"
     id = db.Column(db.Integer, primary_key=True)
     date_created = db.Column(db.DateTime, default=db.func.current_timestamp())
-    date_modified = db.Column(db.DateTime, default=db.func.current_timestamp(),
-    onupdate=db.func.current_timestamp())
+    date_modified = db.Column(db.DateTime, default=db.func.current_timestamp())
     household = db.Column(db.Integer, db.ForeignKey('account.household'), nullable=False)
     points = db.Column(db.Integer, nullable=False)
     maxpoints = db.Column(db.Integer, nullable=False)
@@ -17,6 +16,7 @@ class AvailableChore(db.Model):
         self.points=points
         self.maxpoints=points
         self.choretype=choretype
+        
 class Test(db.Model):
     id=db.Column(db.Integer, primary_key=True)
 
