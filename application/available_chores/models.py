@@ -17,9 +17,6 @@ class AvailableChore(db.Model):
         self.maxpoints=points
         self.choretype=choretype
         
-class Test(db.Model):
-    id=db.Column(db.Integer, primary_key=True)
-
 class DoneChore(db.Model):
     id=db.Column(db.Integer, primary_key=True)
     userid=db.Column(db.Integer, nullable=False)
