@@ -4,11 +4,13 @@ from flask import render_template, request, url_for, redirect
 from flask_login import login_required, current_user
 from application.available_chores.models import AvailableChore, DoneChore
 from application.available_chores.forms import ChoreForm
+from application.auth.models import Household
 
 @app.route("/available_chores/", methods=["GET"])
 @login_required
 def chore_index():
-   return render_template("/available_chores/list.html", avchores = current_user.chores.filter(AvailableChore.points>0))
+    h = Household.query.get(current_user.household)
+    return render_template("/available_chores/list.html", avchores = h.chores.filter(AvailableChore.points>0))
 
 @app.route("/available_chores/donechores/", methods=["GET"])
 @login_required
@@ -20,7 +22,7 @@ def user_index():
 def chore_form():
     return render_template("/available_chores/new.html", form=ChoreForm())
 
-@app.route("/available_chores/<chore_id>/<int:fully>", methods=["POST"])
+@app.route("/available_chores/<chore_id>/<int:fully>" , methods=["POST"])
 @login_required
 def do_chore(chore_id, fully):
     chore = AvailableChore.query.get(chore_id)
@@ -38,6 +40,15 @@ def do_chore(chore_id, fully):
             chore.points=chore.points-1
             donechore.points= donechore.points+1
             db.session.commit()
+    return redirect(url_for("chore_index"))
+
+@app.route("/available_chores/deletion/<chore_id>/" , methods=["POST"])
+@login_required
+def delete_chore(chore_id):
+    chore=AvailableChore.query.get(chore_id)
+    if(chore.points==chore.maxpoints):
+        db.session().delete(chore)
+        db.session().commit()
     return redirect(url_for("chore_index"))
 
 @app.route("/available_chores/", methods=["POST"])

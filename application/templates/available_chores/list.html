@@ -24,6 +24,11 @@
            <input type="submit" value="Tee kokonaan"/>
          </form>
       </td>
+      <td>
+        <form method="POST" action="{{ url_for('delete_chore', chore_id=c.id) }}">
+          <input type="submit" value="Poista tekemätön kotityö"/>
+        </form>
+     </td>
     </tr>
     {% endfor %}
   </table>
