@@ -19,8 +19,8 @@ class AvailableChore(db.Model):
         
 class DoneChore(db.Model):
     id=db.Column(db.Integer, primary_key=True)
-    userid=db.Column(db.Integer, nullable=False)
-    choreid =db.Column(db.Integer, nullable=False)
+    userid=db.Column(db.Integer, db.ForeignKey('account.id'),nullable=False)
+    choreid =db.Column(db.Integer, db.ForeignKey('chore.id'), nullable=False)
     points= db.Column(db.Integer, nullable=False)
     date_created = db.Column(db.DateTime, default=db.func.current_timestamp())
     
