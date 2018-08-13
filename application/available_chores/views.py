@@ -29,7 +29,7 @@ def do_chore(chore_id, fully):
     if not(db.session.query(DoneChore.query.filter(DoneChore.id == chore.id).exists()).scalar()):
         donechore= DoneChore(current_user.id, chore.id, 0)
         db.session.add(donechore)
-    donechore=DoneChore.query.get(chore.id)       
+    donechore=DoneChore.query.get(chore.id)
     if(chore.points>0):    
         if(fully):
             score=chore.points
