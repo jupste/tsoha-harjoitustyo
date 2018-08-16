@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<p>
+  Laiskat käyttäjät: 
+</p>
+
+{% if lazy is defined %}
+<p>
+  Seuraavat käyttäjät ovat olleet laiskoja:
+</p>
+
+<ul>
+  {% for user in lazy %}
+  <li>
+    {{user.id}} {{user.name}}
+  </li>
+  {% endfor %}
+</ul>
+<p>Hävetkää!</p>
+{% endif %}
+
+{% endblock %}

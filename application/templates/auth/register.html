@@ -3,18 +3,36 @@
 {% block body %}
   <form method="POST" action="{{ url_for('auth_register') }}">
     <table>
-     <tr><td>
-	  {{ form.name.label }}
-		</td>
-	<td>
-	  {{ form.name }}
-	</td></tr>
-	<tr><td>
-	  {{ form.username.label }}
-	</td>
-	<td>
-	  {{ form.username }}
-    </td>
+    <tr>
+			<td>
+	  		{{ form.name.label }}
+			</td>
+			<td>
+	  		{{ form.name }}
+			</td>
+			<td>
+					<ul>
+						{% for error in form.name.errors %}
+					<li>{{ error }}</li>
+						{% endfor %}
+					</ul>
+			</td>
+		</tr>
+		<tr>
+			<td>
+	  		{{ form.username.label }}
+			</td>
+			<td>
+	 	 		{{ form.username }}
+			</td>
+			<td>
+				<ul>
+					{% for error in form.username.errors %}
+					<li>{{ error }}</li>
+						{% endfor %}
+				</ul>
+			</td>
+		</tr>
     <tr><td>
         {{ form.password.label}}
         </td>
@@ -22,25 +40,27 @@
             {{ form.password }}
         </td>
 	<td>
-		<ul>
-			{% for error in form.password.errors %}
+			<ul>
+				{% for error in form.password.errors %}
 			<li>{{ error }}</li>
-			{% endfor %}
-		</ul>
-		</td>
+				{% endfor %}
+			</ul>
+	</td>
       </tr>
       <tr>
-		<td>
+	<td>
 	  {{ form.household.label }}
 	</td>
 	<td>
 	  {{ form.household }}
 	</td>
-      </tr>
+     </tr>
       <tr>
 		<td colspan="2">
 	  <input type="submit" value="Lisää käyttäjä"/>
 	</td>
       </tr>
-  </form>
+	</form>
+	<td><form action= "{{ url_for('household_form') }}"><input type="submit" value= "Lisää kotitalous"/></form></td>
+ 
 {% endblock %}

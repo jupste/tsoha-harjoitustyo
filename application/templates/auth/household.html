@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+<form method="POST" action="{{ url_for('add_household') }}">
+  <table>
+    <tr>
+      <td>
+	<p>Kotitalouden nimi</p>
+      </td>
+      <td>
+	{{ form.name }}
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2">
+	<input type="submit" value="Lisää kotitalous"/>
+      </td>
+    </tr>
+</form>
+{% endblock %}

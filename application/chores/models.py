@@ -1,10 +1,8 @@
 from application import db
+from application.models import Base
 
-class AvailableChore(db.Model):
+class AvailableChore(Base):
     __tablename__ = "chore"
-    id = db.Column(db.Integer, primary_key=True)
-    date_created = db.Column(db.DateTime, default=db.func.current_timestamp())
-    date_modified = db.Column(db.DateTime, default=db.func.current_timestamp(), onupdate=db.func.current_timestamp())
     householdid = db.Column(db.Integer, db.ForeignKey('household.id'), nullable=False)
     points = db.Column(db.Integer, nullable=False)
     maxpoints = db.Column(db.Integer, nullable=False)
@@ -17,12 +15,10 @@ class AvailableChore(db.Model):
         self.maxpoints=points
         self.choretype=choretype
         
-class DoneChore(db.Model):
-    id=db.Column(db.Integer, primary_key=True)
+class DoneChore(Base):
     userid=db.Column(db.Integer, db.ForeignKey('account.id'),nullable=False)
     choreid =db.Column(db.Integer, db.ForeignKey('chore.id'), nullable=False)
     points= db.Column(db.Integer, nullable=False)
-    date_created = db.Column(db.DateTime, default=db.func.current_timestamp())
     
     def __init__(self, userid, choreid, points):
         self.userid = userid

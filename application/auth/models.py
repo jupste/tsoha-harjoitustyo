@@ -1,6 +1,8 @@
 from application import db
-
-class User(db.Model):
+from application.models import Base
+from sqlalchemy.sql import text
+from application.chores.models import DoneChore 
+class User(Base):
 
     __tablename__ = "account"
   
@@ -33,11 +35,23 @@ class User(db.Model):
 
     def is_authenticated(self):
         return True
+    
+    @staticmethod
+    def find_lazy_users():
+        stmt = text("SELECT Account.id, Account.name FROM Account"
+                    " WHERE Account.id NOT IN (SELECT userid FROM done_chore)")
+        res = db.engine.execute(stmt)
+  
+        response = []
+        for row in res:
+            response.append({"id":row[0], "name":row[1]})
 
-class Household(db.Model):
-    id= db.Column(db.Integer, primary_key=True)
+        return response
+
+class Household(Base):
     name= db.Column(db.String(144), nullable=False)
     chores= db.relationship('AvailableChore', backref='household', lazy='dynamic')
     
     def __init__(self, name):
         self.name=name
+    
