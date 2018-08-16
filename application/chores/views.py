@@ -22,6 +22,15 @@ def user_index():
 def chore_form():
     return render_template("/chores/new.html", form=ChoreForm())
 
+@app.route("/chores/show/edit/<chore_id>", methods=["POST"])
+@login_required
+def edit_message(chore_id):
+    form = ChoreForm(request.form)
+    chore= AvailableChore.query.get(chore_id)
+    chore.message=form.message.data
+    db.session().commit()
+    return render_template("chores/chore.html", chore=AvailableChore.query.get(chore_id), form=ChoreForm())
+
 @app.route("/chores/<chore_id>/<int:fully>" , methods=["POST"])
 @login_required
 def do_chore(chore_id, fully):
@@ -42,10 +51,11 @@ def do_chore(chore_id, fully):
             db.session.commit()
     return redirect(url_for("chore_index"))
 
-@app.route("/chores/show/<chore_id>/" , methods=["POST"])
+
+@app.route("/chores/show/<chore_id>/" , methods=["GET"])
 @login_required
-def prosessi_nayta(chore_id):
-    return render_template("chores/chore.html", chore=AvailableChore.query.get(chore_id))
+def show_chore(chore_id):
+    return render_template("chores/chore.html", chore=AvailableChore.query.get(chore_id), form=ChoreForm())
 
 @app.route("/chores/deletion/<chore_id>/" , methods=["POST"])
 @login_required

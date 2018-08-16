@@ -7,7 +7,7 @@ choretypes=[("Imurointi","Imurointi") , ("Tiskaus", "Tiskaus"), ("Pyykkien pesem
 
 class ChoreForm(Form):
     choretype = SelectField(label="Kotityö", choices=choretypes)
-    points = IntegerField("Pisteet", [validators.NumberRange(message="Pisteet valilta 1-10", min=1, max=10)])
-    message = StringField("Viesti")
+    points = IntegerField(label="Pisteet", validators=[validators.NumberRange(message="Pisteet valilta 1-10", min=1, max=10)])
+    message = StringField(label="Viesti")
     class Meta:
         csrf = False

@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+<fieldset>
+    <legend>Kotityö {{ chore.id }}</legend>
+    <p>
+        <b>Tyyppi: </b> {{ chore.choretype }}
+    </p>
+    <p>
+        <b>Kotitalous :</b> {{ chore.household }}
+    </p>
+    <p>
+        <b>Pisteet:</b> {{ chore.points }} <b>/</b> {{ chore.maxpoints }}
+    </p>
+    <p>
+        <b>Viesti: </b> {{ chore.message }}
+    </p>
+    <form method="POST" action="{{url_for('edit_message', chore_id=chore.id) }}">
+    <table>
+            <tr>
+            <td>
+            {{ form.message.label }}
+            </td>
+            <td>
+            {{ form.message }}
+            </td>
+            <td>
+                <input type="submit" value= "Muokkaa viestiä">
+            </td>
+            </tr>
+    </table>
+    </form>
+    <form method= "POST" action="{{url_for('delete_chore', chore_id=chore.id) }}">
+        <input type="submit" value="Poista tekemätön kotityö">
+    </form>
+
+</fieldset>
+
+{% endblock %}
