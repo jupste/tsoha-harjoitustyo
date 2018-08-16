@@ -55,7 +55,7 @@ chores.db
 *.log
 local_settings.py
 db.sqlite3
-
+.vscode
 # Flask stuff:
 instance/
 .webassets-cache
