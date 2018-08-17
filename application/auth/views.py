@@ -44,7 +44,7 @@ def register_form():
 
 @app.route("/auth/register", methods = ["POST"])
 def auth_register():
-    form = UserForm(request.form)
+    form = UserForm()
 #    if not form.validate():
 #        return render_template("auth/register.html", form = form)
     user = User(form.name.data, form.username.data, form.password.data, form.household.data)
