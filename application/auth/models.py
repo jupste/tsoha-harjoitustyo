@@ -38,14 +38,14 @@ class User(Base):
     
     @staticmethod
     def find_lazy_users():
-        stmt = text("SELECT Account.id, Account.name FROM Account"
+        stmt = text("SELECT Account.id, Account.name, Household.name FROM Account "
+                    "INNER JOIN Household ON Account.household=Household.id "
                     " WHERE Account.id NOT IN (SELECT userid FROM done_chore)")
         res = db.engine.execute(stmt)
   
         response = []
         for row in res:
-            response.append({"id":row[0], "name":row[1]})
-
+            response.append({"id":row[0], "name":row[1], "household": row[2]})
         return response
 
 class Household(Base):

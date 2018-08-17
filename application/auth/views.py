@@ -28,7 +28,7 @@ def household_form():
 
 @app.route("/auth/household", methods=["POST"])
 def add_household():
-    form = UserForm(request.form)
+    form = UserForm()
     household = Household(form.name.data)
     db.session.add(household)
     db.session().commit()
@@ -37,7 +37,8 @@ def add_household():
 @app.route("/auth/logout")
 def auth_logout():
     logout_user()
-    return redirect(url_for("index"))    
+    return redirect(url_for("index"))   
+
 @app.route("/auth/register")
 def register_form():
     return render_template("/auth/register.html", form=UserForm())
