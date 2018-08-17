@@ -13,7 +13,7 @@
 <ul>
   {% for user in lazy %}
   <li>
-    {{user.id}} {{user.name}} {{user.household}}
+    <p>Käyttäjä id: </p>{{user.id}} <p>Nimi: </p> {{user.name}} <p>Kotitalous: </p>{{user.household}}
   </li>
   {% endfor %}
 </ul>

@@ -15,5 +15,9 @@ class UserForm(FlaskForm):
     password = PasswordField("Salasana", [validators.Length(min=2, max=32, message="Salasanan pitää olla ainakin 2 ja korkeintaan 32 merkkiä pitkä")])
     household = SelectField("Kotitalous", choices=households)
     #TODO: Kotitalouksien lista päivittyy vasta sovelluksen uudelleenkäynnistyessä
+    def __init__(self, *args, **kwargs):
+        super(UserForm, self).__init__(*args, **kwargs)
+        self.household.choices = [(h.id, h.name) for h in Household.query.all()]
+    
     class Meta:
         csrf = False

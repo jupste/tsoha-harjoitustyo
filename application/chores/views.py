@@ -15,7 +15,7 @@ def chore_index():
 @app.route("/chores/donechores/", methods=["GET"])
 @login_required
 def user_index():
-    return render_template("/chores/userchorelist.html", donechores = DoneChore.query.filter(DoneChore.userid==current_user.id))
+    return render_template("/chores/userchorelist.html", donechores = DoneChore.user_done_chores())
 
 @app.route("/chores/new/")
 @login_required
