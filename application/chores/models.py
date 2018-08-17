@@ -33,7 +33,7 @@ class DoneChore(Base):
                     "done_chore.points, done_chore.date_created FROM done_chore "
                     "INNER JOIN Account ON done_chore.userid=Account.id "
                     "INNER JOIN chore ON done_chore.choreid=chore.id"
-                    " WHERE done_chore.userid== " + str(current_user.id) +";")
+                    " WHERE done_chore.userid= " + str(current_user.id) +";")
         res = db.engine.execute(stmt)
   
         response = []
