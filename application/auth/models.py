@@ -1,7 +1,8 @@
 from application import db
 from application.models import Base
 from sqlalchemy.sql import text
-from application.chores.models import DoneChore 
+from application.donechores.models import DoneChore 
+
 class User(Base):
 
     __tablename__ = "account"
@@ -47,11 +48,3 @@ class User(Base):
         for row in res:
             response.append({"id":row[0], "name":row[1], "household": row[2]})
         return response
-
-class Household(Base):
-    name= db.Column(db.String(144), nullable=False)
-    chores= db.relationship('AvailableChore', backref='household', lazy='dynamic')
-    
-    def __init__(self, name):
-        self.name=name
-    

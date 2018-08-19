@@ -3,7 +3,7 @@
 # -*- coding: utf-8 -*-
 from flask_wtf import FlaskForm
 from wtforms import PasswordField, StringField, SelectField, validators
-from application.auth.models import Household
+from application.households.models import Household
 
 class UserForm(FlaskForm):
     households=[]

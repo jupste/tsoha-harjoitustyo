@@ -4,7 +4,6 @@ from application.auth.models import User
 
 @app.route("/")
 def index():
-    User.find_lazy_users()
     return render_template("index.html")
 
 @app.route("/lazy")

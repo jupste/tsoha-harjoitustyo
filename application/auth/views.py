@@ -4,7 +4,7 @@ from flask import render_template, request, redirect, url_for
 from flask_login import login_user, logout_user
 from application import app, db
 from application.auth.models import User
-from application.auth.models import Household
+from application.households.models import Household
 from application.auth.forms import UserForm
 
 @app.route("/auth/login", methods = ["GET", "POST"])
@@ -21,18 +21,6 @@ def auth_login():
 
     login_user(user)
     return redirect(url_for("index"))
-
-@app.route("/auth/household")
-def household_form():
-    return render_template("/auth/household.html", form=UserForm())
-
-@app.route("/auth/household", methods=["POST"])
-def add_household():
-    form = UserForm()
-    household = Household(form.name.data)
-    db.session.add(household)
-    db.session().commit()
-    return redirect(url_for("register_form"))
 
 @app.route("/auth/logout")
 def auth_logout():
