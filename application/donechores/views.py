@@ -1,7 +1,7 @@
 from application import app, db
 from application.chores.models import AvailableChore
 from application.donechores.models import DoneChore
-from flask import url_for, render_template
+from flask import url_for, render_template, redirect
 from flask_login import login_required, current_user
 from application.chores.views import chore_index
 
