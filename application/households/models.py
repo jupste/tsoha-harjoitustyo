@@ -7,7 +7,7 @@ from application.weeklychore.models import WeeklyChore
 class Household(Base):
     name= db.Column(db.String(144), nullable=False)
     chores= db.relationship('AvailableChore', backref='available', lazy='dynamic')
-    weekly_chores= db.relationship('WeeklyChore', backref= 'weekly', lazy= 'dynamic')
+    weekly_chores= db.relationship('WeeklyChore', backref= 'weekly', lazy= True)
     
     def __init__(self, name):
         self.name=name
