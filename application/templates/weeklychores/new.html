@@ -1,0 +1,50 @@
+{% extends "layout.html" %}
+  
+{% block body %}
+  <form method="POST" action="{{ url_for('weekly_create') }}">
+    <table>
+     <tr><td>
+	  {{ form.choretype.label }}
+		</td>
+	<td>
+	  {{ form.choretype }}
+    </td>
+    </tr>
+	<tr>
+    <td>
+	  {{ form.interval.label }}
+	</td>
+	<td>
+	  {{ form.interval }}
+	</td>
+	<td>
+		<ul>
+			{% for error in form.interval.errors %}
+			<li>{{ error }}</li>
+			{% endfor %}
+		</ul>
+	</td>
+    </tr>
+    <tr>
+	<td>
+	  {{ form.points.label }}
+	</td>
+	<td>
+	  {{ form.points }}
+    </td>
+    <td>
+            <ul>
+                {% for error in form.points.errors %}
+                <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+        </td>
+      </tr>
+  <tr>
+	<td colspan="2">
+	  <input type="submit" value="Lisää viikottainen kotityö"/>
+	</td>
+	</tr>
+			</table>
+  </form>
+{% endblock %}

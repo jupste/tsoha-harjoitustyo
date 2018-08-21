@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+
+{% block body %}
+  <table>
+    <tr>
+      <th>Tyyppi</th>
+      <th>Pisteet</th>
+      <th>Aikaväli</th>
+    </tr>
+    {% for weekly in weeklychores %}
+    <tr>
+      <td>{{ weekly.choretype }}</td>
+      <td>{{ weekly.points }}</td>
+      <td>{{ weekly.interval }}</td>
+      <td>
+         <form method="GET" action="{{ url_for('show_weekly', weekly_id=weekly.id) }}">
+           <input type="submit" value="Näytä viikottainen kotityö"/>
+         </form>
+      </td>
+    </tr>
+    {% endfor %}
+    <tr>
+    <td>
+      <form method="GET" action="{{ url_for('weekly_form') }}">
+        <input type="submit" value= "Lisää uusi">
+      </form>
+    </td>
+  </tr>
+  </table>
+{% endblock %}

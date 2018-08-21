@@ -1,19 +1,19 @@
 {% extends "layout.html" %}
 
 {% block body %}
+  <H3>Saatavilla olevat kotityöt</H3>
   <table>
     <tr>
+      <th></th>
       <th>Kotityö</th>
-      <th>Kotitalous</th>
       <th>Tyyppi</th>
       <th>Pisteet</th>
     </tr>
     {% for c in avchores %}
     <tr>
       <td>{{ c.id }}</td>
-      <td>{{ c.household }}</td>
       <td>{{ c.choretype }}</td>
-      <td>{{ c.points }}</td>
+      <td>{{ c.points }} / {{ c.maxpoints }}</td>
       <td>
 	       <form method="POST" action="{{ url_for('do_chore', chore_id=c.id, fully=0) }}">
 	         <input type="submit" value="Tee osittain"/>
@@ -29,6 +29,7 @@
           <input type="submit" value="Näytä kotityö"/>
         </form>
      </td>
+     <td> {{ c.message }}</td>     
     </tr>
     {% endfor %}
   </table>

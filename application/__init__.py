@@ -13,12 +13,13 @@ else:
 db = SQLAlchemy(app)
 
 from application import views
-
 from application.chores import models, views, forms
 from application.donechores import models, views, forms
 from application.auth import models, views, forms
 from application.households import models, views, forms
+from application.weeklychore import models, views, forms
 from application.auth.models import User
+
 from os import urandom
 
 app.config["SECRET_KEY"] = urandom(32)

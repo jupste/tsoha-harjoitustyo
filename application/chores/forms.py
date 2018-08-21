@@ -3,7 +3,8 @@
 from flask_wtf import FlaskForm
 from wtforms import Form, SelectField, StringField, validators, IntegerField
 
-choretypes=[("Imurointi","Imurointi") , ("Tiskaus", "Tiskaus"), ("Pyykkien peseminen", "Pyykkien peseminen"), ("Lemmikkien ulkoiluttaminen", "Lemmikkien ulkoiluttaminen"), ("Mattojen tamppaus", "Mattojen tamppaus"), ("Pölyjen pyyhkiminen", "Polyjen pyyhkiminen")]
+choretypes=[("Imurointi","Imurointi") , ("Tiskaus", "Tiskaus"), ("Pyykkien peseminen", "Pyykkien peseminen"), ("Lemmikkien ulkoiluttaminen", "Lemmikkien ulkoiluttaminen"),
+ ("Mattojen tamppaus", "Mattojen tamppaus"), ("Pölyjen pyyhkiminen", "Polyjen pyyhkiminen"), ("Muu", "Muu")]
 
 class ChoreForm(Form):
     choretype = SelectField(label="Kotityö", choices=choretypes)
