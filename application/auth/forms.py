@@ -6,7 +6,7 @@ from wtforms import PasswordField, StringField, SelectField, validators
 #from application.households.models import Household
 
 class UserForm(FlaskForm):
-    #households=[]
+    households=[]
     #h=Household.query.all()
     #for house in h:
         #households.append((house.id, house.name))
