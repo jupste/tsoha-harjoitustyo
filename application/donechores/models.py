@@ -18,8 +18,9 @@ class DoneChore(Base):
         stmt = text("SELECT Account.id, Account.name, chore.choretype, "
                     "done_chore.points, done_chore.date_created FROM done_chore "
                     "INNER JOIN Account ON done_chore.userid=Account.id "
-                    "INNER JOIN chore ON done_chore.choreid=chore.id"
-                    " WHERE done_chore.userid= " + str(current_user.id) +";")
+                    "INNER JOIN chore ON done_chore.choreid=chore.id "
+                    "INNER JOIN household ON account.household= household.id"
+                    " WHERE account.household= " + str(current_user.household) +";")
         res = db.engine.execute(stmt)
   
         response = []

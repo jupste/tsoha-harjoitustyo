@@ -1,12 +1,13 @@
 {% extends "layout.html" %}
 
 {% block body %}
-<H3>Käyttäjän tekemät kotityöt</H3>
+<H3>Kotitaloudessa tehdyt kotityöt</H3>
 
 {% if donechores is defined %}
 <ul>
   {% for chore in donechores %}
   <li>
+    <p><b>Tekijä: </b> {{ chore.name }} </p>
     <p><b>Kotityö:</b>{{chore.choretype}} <b>Pisteet: </b> {{chore.points}} <b>Päivämäärä: </b> {{chore.date}}</p>
   </li>
   {% endfor %}

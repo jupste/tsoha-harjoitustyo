@@ -35,7 +35,7 @@ class User(Base):
     
     def roles(self):
         if self.id==1:
-            return ["Admin"]
+            return ["Boss"]
         return ["Peon"]
     
     @staticmethod
