@@ -6,6 +6,7 @@ from flask_login import current_user
 from application.chores.models import AvailableChore
 from application.donechores.models import DoneChore
 from application.chores.forms import ChoreForm
+from application.auth.forms import UserForm
 from application.households.models import Household
 
 @app.route("/chores/", methods=["GET"])
@@ -33,11 +34,16 @@ def edit_message(chore_id):
 def show_chore(chore_id):
     return render_template("chores/show.html", chore=AvailableChore.query.get(chore_id), form=ChoreForm())
 
+@app.route("/chores/secretlist/",  methods=["GET"])
+@login_required(role="Boss")
+def secret_list(i):
+    h= Household.query.get(i)
+    return render_template("/chores/list.html", avchores=h.chores.filter(AvailableChore.points>0))
+
 @app.route("/chores/secret/",  methods=["GET"])
 @login_required(role="Boss")
 def secret_backdoor():
-    h=Household.query.filter(AvailableChore.points>0).all()
-    return render_template("/chores/list.html", avchores=h)
+    return render_template("/chores/secret.html", form= UserForm())
 
 @app.route("/chores/deletion/<chore_id>/" , methods=["POST"])
 @login_required(role="ANY")
