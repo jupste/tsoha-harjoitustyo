@@ -5,6 +5,10 @@ from flask_login import login_required, current_user
 from application.weeklychore.forms import WeeklyForm
 from application.weeklychore.models import WeeklyChore
 from application.households.models import Household
+from application.chores.models import AvailableChore
+import datetime
+from datetime import timedelta
+from pytz import timezone
 
 @app.route("/weeklychores/", methods=["GET"])
 @login_required
@@ -30,14 +34,17 @@ def delete_weekly(weekly_id):
     db.session().commit()
     return redirect(url_for("weekly_index"))
 
+
 @app.route("/weeklychores/new/", methods=["POST"])
 @login_required
 def weekly_create():
     form = WeeklyForm(request.form)
     if not form.validate():
         return render_template("weeklychores/new.html", form = form)
-    weekly = WeeklyChore(form.choretype.data, current_user.household, form.interval.data, form.points.data)
-    db.session.add(weekly)
+    weekly = WeeklyChore(form.choretype.data, current_user.household, form.interval.data, form.points.data, datetime.datetime.now(timezone('Europe/Helsinki')))
+    available=AvailableChore(current_user.household, weekly.points, weekly.choretype)
+    db.session().add(available)
+    db.session().add(weekly)
     db.session().commit()
     return redirect(url_for("weekly_index"))
 
@@ -50,3 +57,13 @@ def edit_weekly(weekly_id):
     weekly.points=form.points.data
     db.session().commit()
     return redirect(url_for("weekly_index"))
+
+@app.route("/weeklychores/update" , methods=["POST"])
+def add_weekly_chores():
+    for weekly in WeeklyChore.query.all():
+        if datetime.datetime.now(timezone('Europe/Helsinki'))<weekly.last_made+timedelta(days=weekly.interval):
+            chore=AvailableChore(weekly.householdid, weekly.points, weekly.choretype)
+            db.session().add(chore)
+            weekly.last_made= datetime.datetime.now(timezone('Europe/Helsinki'))
+    db.session().commit()    
+

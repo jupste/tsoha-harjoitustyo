@@ -33,9 +33,13 @@ class User(Base):
     def is_authenticated(self):
         return True
     
+    def roles(self):
+        if self.id==1:
+            return ["Admin"]
+        return ["Peon"]
+    
     @staticmethod
     def find_lazy_users():
-        print("Moi")
         time= datetime.datetime.now(timezone('Europe/Helsinki'))- timedelta(days=7)
         stmt = text("SELECT Account.id, Account.name, Household.name FROM Account "
                     "INNER JOIN Household ON Account.household=Household.id "
