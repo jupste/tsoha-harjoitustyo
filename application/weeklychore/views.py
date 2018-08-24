@@ -9,6 +9,7 @@ from application.chores.models import AvailableChore
 import datetime
 from datetime import timedelta
 from pytz import timezone
+import pytz
 
 @app.route("/weeklychores/", methods=["GET"])
 @login_required
@@ -43,6 +44,7 @@ def weekly_create():
         return render_template("weeklychores/new.html", form = form)
     weekly = WeeklyChore(form.choretype.data, current_user.household, form.interval.data, form.points.data, datetime.datetime.now(timezone('Europe/Helsinki')))
     available=AvailableChore(current_user.household, weekly.points, weekly.choretype)
+    available.message=" "
     db.session().add(available)
     db.session().add(weekly)
     db.session().commit()
@@ -60,10 +62,15 @@ def edit_weekly(weekly_id):
 
 @app.route("/weeklychores/update" , methods=["POST"])
 def add_weekly_chores():
+    utc= pytz.UTC
+    now = utc.localize(datetime.datetime.now()) 
     for weekly in WeeklyChore.query.all():
-        if datetime.datetime.now(timezone('Europe/Helsinki'))<weekly.last_made+timedelta(days=weekly.interval):
+        deadline = utc.localize(weekly.last_made+ timedelta(days=weekly.interval))
+        if now > deadline:
             chore=AvailableChore(weekly.householdid, weekly.points, weekly.choretype)
+            chore.message=" "
             db.session().add(chore)
             weekly.last_made= datetime.datetime.now(timezone('Europe/Helsinki'))
-    db.session().commit()    
+            db.session().commit()
+        
 
