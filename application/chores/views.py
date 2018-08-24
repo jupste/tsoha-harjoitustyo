@@ -52,6 +52,9 @@ def delete_chore(chore_id):
     if(chore.points==chore.maxpoints):
         db.session().delete(chore)
         db.session().commit()
+        return redirect(url_for("chore_index"))
+    chore.points=0
+    db.session().commit()
     return redirect(url_for("chore_index"))
 
 @app.route("/chores/", methods=["POST"])

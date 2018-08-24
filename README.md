@@ -6,6 +6,7 @@
 
 [Tietokantamalli](https://github.com/jupste/tsoha-harjoitustyo/blob/master/documentation/diagram.png)
 
+[Asennus ja käyttöohje](https://github.com/jupste/tsoha-harjoitustyo/blob/master/documentation/installation.md)
 
 Usein kotityöt jäävät tekemättä, kun taloudessa on monta henkilöä ja töiden jako jää puolitiehen. Tähän ongelmaan on kehitteillä PisteetKotiin- kotityösovellus, jonka avulla kotityöt jakautuvat melkein itsestään. 
 
