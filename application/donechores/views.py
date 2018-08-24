@@ -2,16 +2,16 @@ from application import app, db, login_required
 from application.chores.models import AvailableChore
 from application.donechores.models import DoneChore
 from flask import url_for, render_template, redirect
-from flask_login import current_user
+from flask_login import current_user, login_required
 from application.chores.views import chore_index
 
 @app.route("/donechores", methods=["GET"])
-@login_required(role="ANY")
+@login_required
 def user_index():
     return render_template("/donechores/userchorelist.html", donechores = DoneChore.user_done_chores())
 
 @app.route("/chores/<chore_id>/<int:fully>" , methods=["POST"])
-@login_required(role="ANY")
+@login_required
 def do_chore(chore_id, fully):
     chore = AvailableChore.query.get(chore_id)
     if not db.session.query(DoneChore.query.filter(DoneChore.id == chore.id).exists()).scalar():

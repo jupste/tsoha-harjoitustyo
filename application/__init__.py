@@ -12,10 +12,7 @@ else:
 
 db = SQLAlchemy(app)
 
-from application.auth.models import User
-
 from os import urandom
-
 app.config["SECRET_KEY"] = urandom(32)
 
 from flask_login import LoginManager, current_user
@@ -31,7 +28,7 @@ def login_required(role="ANY"):
     def wrapper(fn):
         @wraps(fn)
         def decorated_view(*args, **kwargs):
-            if not current_user.is_authenticated():
+            if not current_user.is_authenticated:
                 return login_manager.unauthorized()
             
             unauthorized = False
@@ -58,6 +55,7 @@ from application.donechores import models, views
 from application.auth import models, views, forms
 from application.households import models, views, forms
 from application.weeklychore import models, views, forms
+from application.auth.models import User
 
 @login_manager.user_loader
 def load_user(user_id):
