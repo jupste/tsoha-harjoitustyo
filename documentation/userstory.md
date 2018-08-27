@@ -1,13 +1,64 @@
 ## Käyttäjätarinat
 
-> "Käyttäjänä haluan että kotityöt tulee tehtyä tasaisin väliajoin, jotta sotku ei kertyisi ylitsepääsemättömäksi"
+### Käyttäjä haluaa lisätä itselleen käyttäjätilan
 
-- Sovellus tarjoaa mahdollisuuden määrittää kotitöiden tekovälin, jonka jälkeen sovellus muistuttaa että kyseisen kotityön voi tehdä
+Hyväksymiskriteerit:
+- Käyttäjä valitsee uusi käyttäjä välilehden
+- Käyttäjä valitsee itselleen nimen ja käyttäjätunnuksen sekä salasanan
+- Käyttäjä valitsee, mihin kotitalouteen hän haluaa liittyä, tai jos hän ei halua liittyä mihinkään olemassaolevaan kotitalouteen, voi hän luoda uuden.
 
-> "Haluan varmistua, että kotityöt jakautuvat mahdollisimman tasaisesti siten, että kenenkään työpanos ei kasva liian suureksi"
+### Käyttäjä lisää uuden kotitalouden
 
-- Sovellus pisteyttää kotityöt siten, että pisteitä saa työn vaativuuden perustella. Esim. paljon aikaa vievistä tai fyysisesti raskaista kotitöistä saa enemmän pisteitä
+Hyväksymiskriteerit:
+- Käyttäjä painaa "lisää uusi kotitalous" -painiketta
+- Käyttäjä valitsee uudelle kotitaloudelle nimen
 
-> "Haluan nähdä mitä kotitöitä olen tehnyt menneisyydessä"
+### Käyttäjä listaa tehtävissä olevat kotityöt ja tekee niistä yhden osittain
 
-- Sovellus tarjoaa mahdollisuuden listata menneet kotityöt sekä suodaattaa näitä esimerkiksi päivämäärän mukaan.
+Hyväksymiskriteerit:
+- Käyttäjä siirtyy "Saatavilla olevat kotityöt"-välilehteen
+- Sovellus näyttää listan kaikista käyttäjän kotitalouden tekemättömistä kotitöistä
+- Käyttäjä painaa "Tee osittain"-nappia, jolloin käyttäjälle kirjautuu osasuoritus kyseisestä kotityöstä
+
+### Käyttäjä tekee kotityön kokonaan
+
+Hyväksymiskriteerit:
+- Sama kuin ylhäällä, mutta käyttäjä painaa "Tee kokonaan"-painiketta, jolloin käyttäjälle kirjautuu kokonainen suoritus kyseisestä kotityöstä
+
+### Käyttäjä poistaa turhan kotityön
+
+Hyväksymiskriteerit: 
+- Käyttäjä painaa "Näytä kotityö"-painiketta, josta avautuu näkymä yksittäisen kotityön tietoihin
+- Käyttäjä painaa "Poista kotityö"-painiketta, jolloin kyseinen kotityö poistuu
+
+### Käyttäjä muuttaa kotityöhön liitettyä viestiä
+
+Hyväksymiskriteerit: 
+- Käyttäjä painaa "Näytä kotityö"-painiketta, josta avautuu näkymä yksittäisen kotityön tietoihin
+- Käyttäjä kirjoittaa uuden viestin ja painaa "Muokkaa viestiä"-painiketta
+
+### Käyttäjä katsoo kotitaloudessaan suoritetut kotityöt
+
+Hyväksymiskriteerit:
+- Käyttäjä siirtyy "Kotitalouden tehdyt kotityöt"- sivulle, joka listaa kaikki käyttäjän kotitaloudessa tehdyt kotityöt
+
+### Käyttäjä lisää uuden viikottaisen kotityön
+
+Hyväksymiskriteerit:
+- Käyttäjä siirtyy "Viikottaiset kotityöt"- sivulle ja painaa "Lisää uusi" -painiketta
+- Käyttäjä valitsee kotityön tyypin, siitä saatavan pistemäärän ja sen aikavälin
+- Saatavilla oleviin kotitöihin ilmestyy tätä tyyppiä ja tämän pistemäärän omaava uusi tekemätön kotityö
+
+### Käyttäjä muuttaa viikottaista kotityötä
+
+Hyväksymiskriteerit:
+- Käyttäjä siirtyy "Viikottaiset kotityöt"- sivulle ja painaa "Näytä" -painiketta haluamansa kotityön kohdalla
+- Käyttäjä syöttää uudet haluamansa arvot ja painaa "Muokkaa"-painiketta
+
+### Käyttäjä poistaa viikkottaisen kotityön
+
+Hyväksymiskriteerit:
+- Käyttäjä siirtyy "Viikottaiset kotityöt"- sivulle ja painaa "Näytä" -painiketta haluamansa kotityön kohdalla
+- Käyttäjä painaa "Poista"-painiketta, jolloin kyseinen viikottainen kotityö poistuu
+- Tästä viikottaisesta kotityöstä tuotetut tehtävissä olevat kotityöt eivät poistu samalla, vaan ne pitää poistaa erikseen "Saatavilla olevat kotityöt"-sivulta
+
