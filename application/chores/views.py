@@ -1,5 +1,4 @@
 from application import app, db, login_required
-from sqlalchemy import func
 from flask import render_template, request, url_for, redirect
 from flask_login import current_user
 
@@ -13,7 +12,7 @@ from application.households.models import Household
 @login_required(role="ANY")
 def chore_index():
     h = Household.query.get(current_user.household)
-    return render_template("/chores/list.html", avchores = h.chores.filter(AvailableChore.points>0))
+    return render_template("/chores/list.html", chores = AvailableChore.list_chores())
 
 @app.route("/chores/new/")
 @login_required(role="ANY")
@@ -63,7 +62,7 @@ def chore_create_custom():
     form = ChoreForm(request.form)
     if not form.validate():
         return render_template("chores/new.html", form = form)
-    chore = AvailableChore(current_user.household, form.points.data, form.choretype.data)
+    chore = AvailableChore(current_user.household, form.points.data, int(form.choretype.data))
     chore.message=form.message.data
     db.session.add(chore)
     db.session().commit()

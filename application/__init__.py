@@ -56,7 +56,7 @@ from application.auth import models, views, forms
 from application.households import models, views, forms
 from application.weeklychore import models, views, forms
 from application.auth.models import User
-
+from application.choretype import models, views, forms
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(user_id)

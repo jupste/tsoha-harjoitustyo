@@ -16,6 +16,8 @@ def household_form():
 @app.route("/auth/household", methods=["POST"])
 def add_household():
     form = HouseholdForm()
+    if not form.validate():
+        return render_template("households/household.html", form = form)
     household = Household(form.name.data)
     db.session.add(household)
     db.session().commit()

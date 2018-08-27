@@ -16,8 +16,7 @@ def auth_login():
     
     user = User.query.filter_by(username=form.username.data, password=form.password.data).first()
     if not user:
-        return render_template("auth/loginform.html", form = form,
-                               error = "Väärä käyttäjätunnus tai salasana")
+        return render_template("auth/loginform.html", form = form, error = "Väärä käyttäjätunnus tai salasana")
 
     login_user(user)
     return redirect(url_for("index"))
@@ -34,9 +33,9 @@ def register_form():
 @app.route("/auth/register", methods = ["POST"])
 def auth_register():
     form = UserForm()
-#    if not form.validate():
-#        return render_template("auth/register.html", form = form)
-    user = User(form.name.data, form.username.data, form.password.data, form.household.data)
+    if not form.validate_on_submit():
+        return render_template("auth/register.html", form = form)
+    user = User(form.name.data, form.username.data, form.password.data, int(form.household.data))
     db.session.add(user)
     db.session().commit()
     return render_template("auth/loginform.html", form=UserForm())

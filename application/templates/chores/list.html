@@ -9,27 +9,27 @@
       <th>Tyyppi</th>
       <th>Pisteet</th>
     </tr>
-    {% for c in avchores %}
+    {% for chore in chores %}
     <tr>
-      <td>{{ c.id }}</td>
-      <td>{{ c.choretype }}</td>
-      <td>{{ c.points }} / {{ c.maxpoints }}</td>
+      <td>{{ chore.id }}</td>
+      <td>{{ chore.choretype }}</td>
+      <td>{{ chore.points }} / {{ chore.maxpoints }}</td>
       <td>
-	       <form method="POST" action="{{ url_for('do_chore', chore_id=c.id, fully=0) }}">
+	       <form method="POST" action="{{ url_for('do_chore', chore_id=chore.id, fully=0) }}">
 	         <input type="submit" value="Tee osittain"/>
 	       </form>
       </td>
       <td>
-         <form method="POST" action="{{ url_for('do_chore', chore_id=c.id, fully=1) }}">
+         <form method="POST" action="{{ url_for('do_chore', chore_id=chore.id, fully=1) }}">
            <input type="submit" value="Tee kokonaan"/>
          </form>
       </td>
       <td>
-        <form method="GET" action="{{ url_for('show_chore', chore_id=c.id) }}">
+        <form method="GET" action="{{ url_for('show_chore', chore_id=chore.id) }}">
           <input type="submit" value="Näytä kotityö"/>
         </form>
      </td>
-     <td> {{ c.message }}</td>     
+     <td> {{ chore.message }}</td>     
     </tr>
     {% endfor %}
   </table>

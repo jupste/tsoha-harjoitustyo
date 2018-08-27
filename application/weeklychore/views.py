@@ -14,8 +14,7 @@ import pytz
 @app.route("/weeklychores/", methods=["GET"])
 @login_required
 def weekly_index():
-    h = Household.query.get(current_user.household)
-    return render_template("/weeklychores/list.html", weeklychores = h.weekly_chores)
+    return render_template("/weeklychores/list.html", weeklychores = WeeklyChore.list_weeklychores())
 
 @app.route("/weeklychores/new/")
 @login_required
@@ -42,7 +41,7 @@ def weekly_create():
     form = WeeklyForm(request.form)
     if not form.validate():
         return render_template("weeklychores/new.html", form = form)
-    weekly = WeeklyChore(form.choretype.data, current_user.household, form.interval.data, form.points.data, datetime.datetime.now(timezone('Europe/Helsinki')))
+    weekly = WeeklyChore(int(form.choretype.data), current_user.household, form.interval.data, form.points.data, datetime.datetime.now(timezone('Europe/Helsinki')))
     available=AvailableChore(current_user.household, weekly.points, weekly.choretype)
     available.message=" "
     db.session().add(available)

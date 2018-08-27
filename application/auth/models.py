@@ -45,8 +45,6 @@ class User(Base):
                     "INNER JOIN Household ON Account.household=Household.id "
                     " WHERE Account.id NOT IN (SELECT userid FROM done_chore WHERE done_chore.date_created > '"+ str(time) + "')")
         res = db.engine.execute(stmt)
-        #
-        #
         response = []
         for row in res:
             response.append({"id":row[0], "name":row[1], "household": row[2]})
