@@ -10,7 +10,8 @@ class AvailableChore(Base):
     maxpoints = db.Column(db.Integer, nullable=False)
     choretype= db.Column(db.Integer, db.ForeignKey('choretype.id'), nullable= False)
     message= db.Column(db.String(144), nullable= True)
-    
+    type_index=db.Index("type_index", choretype)
+
     def __init__(self, householdid, points, choretype):
         self.householdid = householdid
         self.points=points

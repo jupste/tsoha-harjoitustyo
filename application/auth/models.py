@@ -13,6 +13,7 @@ class User(Base):
     password = db.Column(db.String(144), nullable=False)
     points= db.Column(db.Integer, nullable=False)
     household= db.Column(db.Integer, db.ForeignKey('household.id'),nullable=False)
+    nameIndex= db.Index("name_index", name)
 
     def __init__(self, name, username, password, household):
         self.name = name
