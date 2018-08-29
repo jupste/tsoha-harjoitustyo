@@ -11,8 +11,7 @@ from application.households.models import Household
 @app.route("/chores/", methods=["GET"])
 @login_required(role="ANY")
 def chore_index():
-    h = Household.query.get(current_user.household)
-    return render_template("/chores/list.html", chores = AvailableChore.list_chores())
+    return render_template("/chores/list.html", chores = AvailableChore.list_chores(current_user.household))
 
 @app.route("/chores/new/")
 @login_required(role="ANY")
@@ -35,14 +34,8 @@ def show_chore(chore_id):
 
 @app.route("/chores/secretlist/",  methods=["GET"])
 @login_required(role="Boss")
-def secret_list(i):
-    h= Household.query.get(i)
-    return render_template("/chores/list.html", avchores=h.chores.filter(AvailableChore.points>0))
-
-@app.route("/chores/secret/",  methods=["GET"])
-@login_required(role="Boss")
-def secret_backdoor():
-    return render_template("/chores/secret.html", form= UserForm())
+def secret_list():
+    return render_template("/chores/list.html", chores=AvailableChore.query.filter(AvailableChore.points>0).all())
 
 @app.route("/chores/deletion/<chore_id>/" , methods=["POST"])
 @login_required(role="ANY")

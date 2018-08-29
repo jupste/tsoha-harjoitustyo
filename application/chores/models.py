@@ -17,10 +17,10 @@ class AvailableChore(Base):
         self.maxpoints=points
         self.choretype=choretype
     @staticmethod
-    def list_chores():
+    def list_chores(household):
         stmt = text("SELECT chore.id, chore.points, chore.maxpoints, choretype.name "
                     "FROM chore INNER JOIN choretype ON chore.choretype=choretype.id "
-                    " WHERE chore.householdid= " + str(current_user.household) +" AND chore.points>0;")
+                    " WHERE chore.householdid= " + str(household) +" AND chore.points>0;")
         res = db.engine.execute(stmt)
   
         response = []

@@ -43,3 +43,9 @@ Käyttätäjä voi lisätä kotitaloudelleen uuden viikottaisen kotityön "Viiko
 
 Nyt sovellus on käytettävissä osoittessa
 [localhost:5000](localhost:5000)
+
+- Ennen kuin sovelusta voi täysimääräisesti käyttää testiympäristössä, tulee kotitalouksien tyypit alustaa
+
+- Sovellukseen pitää olla kirjautunut pääkäyttäjän tunnuksilla (ensimmäinen luotu tunnus saa automaattisesti pääkäyttäjän tunnukset)
+
+- Mene sivulle "Pääkäyttäjän näkymä" ja paina "Alusta"-painiketta

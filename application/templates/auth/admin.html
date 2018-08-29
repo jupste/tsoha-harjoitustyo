@@ -6,4 +6,8 @@
     <td> {{ form.household }} </td>
     <input type="submit" value="Ala ryöstelemään"/>
 </form>
+<p>Alusta kotitaloustyyppien lista</p>
+<form method="POST" action= "{{ url_for('initialize_choretypes') }}">
+    <input type="submit" value= "Alusta">
+</form>
 {% endblock %}

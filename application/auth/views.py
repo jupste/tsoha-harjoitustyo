@@ -2,8 +2,9 @@
 # -*- coding: utf-8 -*-
 from flask import render_template, request, redirect, url_for
 from flask_login import login_user, logout_user
-from application import app, db
+from application import app, db, login_required
 from application.auth.models import User
+from application.households.forms import HouseholdForm
 from application.households.models import Household
 from application.auth.forms import UserForm
 
@@ -39,3 +40,13 @@ def auth_register():
     db.session.add(user)
     db.session().commit()
     return render_template("auth/loginform.html", form=UserForm())
+
+@app.route("/auth/lazy")
+def lazy_users():
+    return render_template("lazy.html", lazy= User.find_lazy_users())
+
+@app.route("/auth/admin")
+@login_required(role="Boss")
+def admin_view():
+    return render_template("auth/admin.html")
+
