@@ -12,17 +12,26 @@
 
 Usein kotityöt jäävät tekemättä, kun taloudessa on monta henkilöä ja töiden jako jää puolitiehen. Tähän ongelmaan on kehitteillä PisteetKotiin- kotityösovellus, jonka avulla kotityöt jakautuvat melkein itsestään. 
 
-Sovellus pyrkii pisteyttämään kotitöitä jolloin samassa kotitaloudessa asuvat henkilöt voivat saada pisteitä tekemällä kotitöitä. Sovellukseen on määritelty erilaisia kotityötyyppejä,joista saa tietyn määrän pisteitä. Jokainen käyttäjä kuuluu johonkin kotitalouteen, jolle en määritelty tiety viikkopistemäärä, joka pitää suorittaa. Tämä pistemäärä voi määrittyä esimerkiksi talouden asunnon koon mukaan, kuinka monta lasta tai kotieläintä taloudessa on, tai sen mukaan, mikä yleinen siisteystaso taloudessa halutaan ylläpitää. Pistemäärää voi myös tarvittaessa korottaa tai alentaa, esimerkiksi juhlien tai ulkomaanmatkan takia. 
+Sovellus pyrkii pisteyttämään kotitöitä jolloin samassa kotitaloudessa asuvat henkilöt voivat saada pisteitä tekemällä kotitöitä. Jokainen käyttäjä kuuluu johonkin kotitalouteen ja jokaisella kotitaloudella on oma lista tekemättömistä sekä viikottaisista kotitöistä. Sovellukseen on määritelty erilaisia kotityötyyppejä, joita käyttäjät voivat tehdä sekä luoda uusia. Käyttäjä pystyy myös määrittelemään kotityöstä saatavan pistemäärän. Tämä pistemäärä voi määrittyä esimerkiksi talouden asunnon koon mukaan, kuinka monta lasta tai kotieläintä taloudessa on, tai sen mukaan, mikä yleinen siisteystaso taloudessa halutaan ylläpitää. Viikottaisten kotitöiden pistemäärää voi myös tarvittaessa korottaa tai alentaa, esimerkiksi juhlien tai ulkomaanmatkan takia. 
 
-Jokaiselle kotitaloudelle on määritelty erikseen, mitä kaikkia kotitöitä tässä taloudessa tulee tehdä. Kullekkin kotityölle on merkitty myös tietty aikaväli, jonka välein niitä olisi hyvä suorittaa. Näin ollen sovellus ei tarjoa esimerkiksi imurointia suoritettavaksi kotityöksi silloin, kun edellisenä päivänä vasta imuroitiin. Mikäli jokin kotityö seisoo tekemättä kotitalouden suorittamattomat listassa liian kauan, saattaa sovellus huomauttaa tästä ja tarvittaessa tarjota lisäpisteitä tämän suorittamisesta. Samalla kotityöllä voi olla myös monta tekijää. Tällöin pisteet jakautuvat tekijöiden kesken. Näin sovellukseen saadaan monesta-moneen suhde. 
-Käyttäjä pystyy lisäämään uusia automaattisesti generoituvia kotitöitä kotitalouteensa. Hän pystyy myös poistamaan aiempia generoituvia kotitöitä tai muokaamaan esim. niiden aikaväliä. Käyttäjä voi lisätä tarjolla oleviin kotitöihin omia custom-kotitöitä ja poistamaan muiden tekemiä custom-kotitöitä. Näin tietokantaan saadaan kaksi CRUDia (create, read, update, delete) toteuttavaa tietokantataulua. 
+Samalla kotityöllä voi olla myös monta tekijää. Tällöin pisteet jakautuvat tekijöiden kesken. Kotityön voi jakaa yhtä monta osaan, kuin mitä sillä on pisteitä. Näin sovellukseen saadaan monesta-moneen suhde. 
+Käyttäjä pystyy lisäämään uusia automaattisesti generoituvia kotitöitä kotitalouteensa. Hän pystyy myös poistamaan aiempia generoituvia kotitöitä tai muokaamaan esim. niiden aikaväliä. Käyttäjä voi lisätä tarjolla oleviin kotitöihin custom-kotitöitä sekä poistamaan sekä viikottaisten kotitöiden tuottamia tekemättömiä kotitöitä, että custom-kotitöitä. 
 
 
 Toiminnalisuudet:
 - Uuden käyttäjän luominen. Kun uusi käyttäjä luodaan, voi hän liittyä olemassa olevaan kotitalouteen tai hän voi perustaa uuden kotitalouden.
 - Kotitalous generoi listan suorittamattomista kotitöistä, josta käyttäjät voivat käydä valitsemassa suoritettavia kotitöitä. Suoritetut kotityöt näkyvät käyttäjän näkymässä.
 - Käyttäjät voivat tarvittaessa lisätä generoitavia kotitöitä ja myös lisätä kertaluonteisia kotitaloussuoritteita. 
+- Pääkäyttäjä voi alustaa kotitaloustyyppien listan sekä tehdä muiden kuin oman kotitalouden kotitöitä
 
 Sovelluksen käyttäjätunnukset:
 tunnus: seppo
 salasana: testi
+
+Tulevia kehityskohteita:
+- Kotitöiden pisteiden automaattinen lisääminen, mikäli ne seisovat liian kauan tekemättöminä
+- Tehtyjen kotitöiden tilastointi
+- Kotitalouteen liittymiseen salasana tai jokin muu rajaava tekijä
+- Kotitöiden dynaaminen pisteyttäminen, ts. suosittujen kotitöiden pisteitä lasketaan kun taas epäsuosittujen nostetaan
+- Käyttäjien kokonaispisteiden vertailu jollakin tietyllä aikavälillä
+- Pääkäyttäjälle kotityötyyppien lisäysmahdollisuus
