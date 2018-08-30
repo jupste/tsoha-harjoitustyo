@@ -18,17 +18,26 @@ Samalla kotityöllä voi olla myös monta tekijää. Tällöin pisteet jakautuva
 Käyttäjä pystyy lisäämään uusia automaattisesti generoituvia kotitöitä kotitalouteensa. Hän pystyy myös poistamaan aiempia generoituvia kotitöitä tai muokaamaan esim. niiden aikaväliä. Käyttäjä voi lisätä tarjolla oleviin kotitöihin custom-kotitöitä sekä poistamaan sekä viikottaisten kotitöiden tuottamia tekemättömiä kotitöitä, että custom-kotitöitä. 
 
 
-Toiminnalisuudet:
+#### Toiminnalisuudet:
 - Uuden käyttäjän luominen. Kun uusi käyttäjä luodaan, voi hän liittyä olemassa olevaan kotitalouteen tai hän voi perustaa uuden kotitalouden.
 - Kotitalous generoi listan suorittamattomista kotitöistä, josta käyttäjät voivat käydä valitsemassa suoritettavia kotitöitä. Suoritetut kotityöt näkyvät käyttäjän näkymässä.
 - Käyttäjät voivat tarvittaessa lisätä generoitavia kotitöitä ja myös lisätä kertaluonteisia kotitaloussuoritteita. 
 - Pääkäyttäjä voi alustaa kotitaloustyyppien listan sekä tehdä muiden kuin oman kotitalouden kotitöitä
 
-Sovelluksen käyttäjätunnukset:
+#### Täyden CRUDin täyttävät tietotaulut:
+[AvailableChore](https://github.com/jupste/tsoha-harjoitustyo/blob/master/application/chores/views.py) sekä [WeeklyChore](https://github.com/jupste/tsoha-harjoitustyo/blob/master/application/weeklychore/views.py)
+
+#### Monesta moneen relaation toteuttava tietotaulut
+
+[DoneChore](https://github.com/jupste/tsoha-harjoitustyo/blob/master/application/donechores/views.py)
+
+Tämä tietotaulu mahdollistaa tietotaulujen [User](https://github.com/jupste/tsoha-harjoitustyo/blob/master/application/auth/views.py) sekä [AvailableChore](https://github.com/jupste/tsoha-harjoitustyo/blob/master/application/chores/views.py) välisen monesta moneen suhteen.
+
+#### Sovelluksen käyttäjätunnukset:
 tunnus: seppo
 salasana: testi
 
-Tulevia kehityskohteita:
+#### Tulevia kehityskohteita:
 - Kotitöiden pisteiden automaattinen lisääminen, mikäli ne seisovat liian kauan tekemättöminä
 - Tehtyjen kotitöiden tilastointi
 - Kotitalouteen liittymiseen salasana tai jokin muu rajaava tekijä

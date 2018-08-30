@@ -1,6 +1,19 @@
 {% extends "layout.html" %}
 
 {% block body %}
+{% if current_user.is_authenticated %}
+<H5>Kotitalouden pistekuningas: </H5>
+{% if topdog is defined %}
+<ul>
+  {% for top in topdog %}
+  <li>
+    <p><b>Käyttäjä: </b> {{ top.name }} </p>
+    <p><b>ID:</b> {{ top.id }}</p>
+    <p><b>Pisteet:</b>{{top.sum}} </p>
+  </li>
+  {% endfor %}
+  {% endif %}
+{% endif %}
 <H3>Esimerkkejä kotitöiden pisteytyksestä ja aikaväleistä</H3>
 <li>
     <ul><b>Tiskaus: </b> 2 pistettä 3 päivän välein </ul>

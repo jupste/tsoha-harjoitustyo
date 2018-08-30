@@ -14,13 +14,12 @@ def auth_login():
         return render_template("auth/loginform.html", form = UserForm())
 
     form = UserForm(request.form)
-    
     user = User.query.filter_by(username=form.username.data, password=form.password.data).first()
     if not user:
         return render_template("auth/loginform.html", form = form, error = "Väärä käyttäjätunnus tai salasana")
 
     login_user(user)
-    return redirect(url_for("index"))
+    return render_template("/index.html", topdog=Household.top_dog())
 
 @app.route("/auth/logout")
 def auth_logout():
