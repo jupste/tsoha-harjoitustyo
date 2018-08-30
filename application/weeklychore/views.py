@@ -53,6 +53,8 @@ def weekly_create():
 @login_required
 def edit_weekly(weekly_id):
     form = WeeklyForm(request.form)
+    if not form.validate():
+        return render_template("weeklychores/show.html", form = form)
     weekly= WeeklyChore.query.get(weekly_id)
     weekly.interval=form.interval.data
     weekly.points=form.points.data
