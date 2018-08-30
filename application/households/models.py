@@ -14,7 +14,7 @@ class Household(Base):
     
     @staticmethod
     def top_dog():
-        stmt = text("SELECT MAX(sum), account.id, accounts.name FROM (SELECT account.id AS id, Account.name AS name, SUM(done_chore.points) AS sum "
+        stmt = text("SELECT MAX(sum), account.id, account.name FROM (SELECT account.id AS id, Account.name AS name, SUM(done_chore.points) AS sum "
                     "FROM done_chore "
                     "INNER JOIN Account ON done_chore.userid=Account.id "
                     "INNER JOIN household ON account.household= household.id "
