@@ -18,7 +18,7 @@ class Household(Base):
                     "FROM done_chore "
                     "INNER JOIN Account ON done_chore.userid=Account.id "
                     "INNER JOIN household ON account.household= household.id "
-                    " WHERE account.household= " + str(current_user.household) +" GROUP BY account.id) AS topdog;")
+                    " WHERE account.household= " + str(current_user.household) +" GROUP BY account.id) AS topdog")
         res = db.engine.execute(stmt)
   
         response = []
