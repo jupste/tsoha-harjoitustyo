@@ -14,11 +14,11 @@ class Household(Base):
     
     @staticmethod
     def top_dog():
-        stmt = text("SELECT MAX(sum), topdog.id, topdog.name FROM (SELECT Account.id AS id, Account.name AS name, SUM(done_chore.points) AS sum "
+        stmt = text("SELECT MAX(sum), topdog.id, topdog.name FROM (SELECT account.id AS id, Account.name AS name, SUM(done_chore.points) AS sum "
                     "FROM done_chore "
                     "INNER JOIN Account ON done_chore.userid=Account.id "
                     "INNER JOIN household ON account.household= household.id "
-                    " WHERE account.household= " + str(current_user.household) +" GROUP BY userid) AS topdog;")
+                    " WHERE account.household= " + str(current_user.household) +" GROUP BY account.id) AS topdog;")
         res = db.engine.execute(stmt)
   
         response = []
