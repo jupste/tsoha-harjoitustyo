@@ -54,6 +54,13 @@
 	<td>
 	  {{ form.household }}
 	</td>
+	<td>
+		<ul>
+			{% for error in form.household.errors %}
+			<li>{{ error }}</li>
+			{% endfor %}
+		</ul>
+		</td>
      </tr>
       <tr>
 		<td colspan="2">

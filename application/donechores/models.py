@@ -21,7 +21,7 @@ class DoneChore(Base):
                     "INNER JOIN chore ON done_chore.choreid=chore.id "
                     "INNER JOIN household ON account.household= household.id "
                     "INNER JOIN choretype ON chore.choretype=choretype.id"
-                    " WHERE account.household= " + str(current_user.household) +";")
+                    " WHERE account.household= " + str(current_user.household) +" ORDER BY done_chore.date_created DESC;")
         res = db.engine.execute(stmt)
   
         response = []

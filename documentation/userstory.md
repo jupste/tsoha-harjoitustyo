@@ -121,5 +121,5 @@ Jos tietue on olemassa:
 >SELECT MAX(sum), id, name FROM (SELECT Account.id AS id, Account.name AS name, SUM(done_chore.points) AS sum FROM done_chore 
                     INNER JOIN Account ON done_chore.userid=Account.id 
                     INNER JOIN household ON account.household= household.id 
-                    WHERE account.household= current_user.household GROUP BY userid);
+                    WHERE account.household= current_user.household GROUP BY userid) AS topdog GROUP BY topdog.id;
 

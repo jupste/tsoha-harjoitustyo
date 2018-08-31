@@ -6,7 +6,7 @@ from application.choretype.models import Choretype
 
 class ChoreForm(FlaskForm):
     choretypes=[]
-    choretype = SelectField(label="Kotityö", choices=choretypes)
+    choretype = SelectField(label="Kotityö", validators=[validators.DataRequired(message="Pääkäyttäjän pitää käydä alustamassa kotityötyyppien lista")], choices=choretypes)
     points = IntegerField(label="Pisteet", validators=[validators.NumberRange(message="Pisteet väliltä 1-10", min=1, max=10)])
     message = StringField(label="Viesti")
     class Meta:

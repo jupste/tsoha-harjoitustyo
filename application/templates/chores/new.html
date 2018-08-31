@@ -3,12 +3,21 @@
 {% block body %}
   <form method="POST" action="{{ url_for('chore_create_custom') }}">
     <table>
-     <tr><td>
-	  {{ form.choretype.label }}
+    <tr>
+			<td>
+	 	 		{{ form.choretype.label }}
 		</td>
-	<td>
-	  {{ form.choretype }}
-	</td></tr>
+		<td>
+	  	{{ form.choretype }}
+		</td>
+		<td>
+			<ul>
+				{% for error in form.choretype.errors %}
+				<li>{{ error }}</li>
+						{% endfor %}
+			</ul>
+		</td>
+</tr>
 	<tr><td>
 	  {{ form.points.label }}
 	</td>

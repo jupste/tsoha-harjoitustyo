@@ -3,12 +3,14 @@ from application.models import Base
 from sqlalchemy.sql import text
 from application.donechores.models import DoneChore 
 from application.weeklychore.models import WeeklyChore
+from application.auth.models import User
 from flask_login import current_user
 class Household(Base):
     name= db.Column(db.String(144), nullable=False)
     chores= db.relationship('AvailableChore', backref='available', lazy=True)
     weekly_chores= db.relationship('WeeklyChore', backref= 'weekly', lazy= True)
-    
+    users= db.relationship("User", backref='users', lazy=True)
+
     def __init__(self, name):
         self.name=name
     
