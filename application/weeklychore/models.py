@@ -18,11 +18,14 @@ class WeeklyChore(Base):
 
     @staticmethod
     def list_weeklychores():
-        stmt = text("SELECT weekly_chore.id, weekly_chore.points, weekly_chore.interval, choretype.name "
-                    "FROM weekly_chore INNER JOIN choretype ON weekly_chore.choretype=choretype.id "
-                    " WHERE weekly_chore.householdid= " + str(current_user.household) +";")
-        res = db.engine.execute(stmt)
-  
+        res=""
+        try:
+            stmt = text("SELECT weekly_chore.id, weekly_chore.points, weekly_chore.interval, choretype.name "
+                        "FROM weekly_chore INNER JOIN choretype ON weekly_chore.choretype=choretype.id "
+                        " WHERE weekly_chore.householdid= " + str(current_user.household) +";")
+            res = db.engine.execute(stmt)
+        except Exception as e:
+            return render_template("/error.html", message= e.message)
         response = []
         for row in res:
             response.append({"id":row[0], "points":row[1], "interval": row[2], "choretype": row[3]})

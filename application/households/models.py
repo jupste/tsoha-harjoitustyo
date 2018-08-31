@@ -16,11 +16,15 @@ class Household(Base):
     
     @staticmethod
     def top_dog():
-        stmt = text("SELECT MAX(sum), id, name FROM (SELECT account.id AS id, Account.name AS name, SUM(done_chore.points) AS sum "
+        res=""
+        try:
+            stmt = text("SELECT MAX(sum), id, name FROM (SELECT account.id AS id, Account.name AS name, SUM(done_chore.points) AS sum "
                     "FROM done_chore "
                     "INNER JOIN Account ON done_chore.userid=Account.id "
                     "INNER JOIN household ON account.household= household.id "
                     " WHERE account.household= " + str(current_user.household) +" GROUP BY account.id) AS topdog GROUP BY topdog.id, topdog.name;")
+        except Exception as e:
+            return render_template("/error.html", message= e.message)
         res = db.engine.execute(stmt)
   
         response = []

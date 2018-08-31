@@ -19,11 +19,14 @@ class AvailableChore(Base):
         self.choretype=choretype
     @staticmethod
     def list_chores(household):
-        stmt = text("SELECT chore.id, chore.points, chore.maxpoints, choretype.name "
-                    "FROM chore INNER JOIN choretype ON chore.choretype=choretype.id "
-                    " WHERE chore.householdid= " + str(household) +" AND chore.points>0;")
-        res = db.engine.execute(stmt)
-  
+        res=""
+        try:
+            stmt = text("SELECT chore.id, chore.points, chore.maxpoints, choretype.name "
+                        "FROM chore INNER JOIN choretype ON chore.choretype=choretype.id "
+                        " WHERE chore.householdid= " + str(household) +" AND chore.points>0;")
+            res = db.engine.execute(stmt)
+        except Exception as e:
+            return render_template("/error.html", message= e.message)
         response = []
         for row in res:
             response.append({"id":row[0], "points":row[1], "maxpoints": row[2], "choretype": row[3]})
