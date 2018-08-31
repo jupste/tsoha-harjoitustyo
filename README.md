@@ -1,3 +1,4 @@
+
 # PisteetKotiin - ainutlaatuinen kotitöiden pisteytyssovellus
 
 [PisteetKotiin](https://pisteetkotiin.herokuapp.com/)
@@ -36,6 +37,14 @@ Tämä tietotaulu mahdollistaa tietotaulujen [User](https://github.com/jupste/ts
 #### Sovelluksen käyttäjätunnukset:
 tunnus: seppo
 salasana: testi
+
+#### Tiedossa olevat bugit
+
+Sovellus saattaa välillä mennä Herokussa "Internal Server Error"" tilaan. Tätä tapahtuu erityisesti sisäänkirjautuessa sekä uutta käyttäjää lisätessä. 
+Lokeissa tämä tapaus antaa virheilmoituksen: 
+> sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) SSL error: decryption failed or bad record mac
+
+Tämä virhe ilmeisesti johtuu yhteysongelmista. Bugin ratkaisemiseksi riittää että painaa selaimessa päivitä-näppäintä. 
 
 #### Tulevia kehityskohteita:
 - Kotitöiden pisteiden automaattinen lisääminen, mikäli ne seisovat liian kauan tekemättöminä
